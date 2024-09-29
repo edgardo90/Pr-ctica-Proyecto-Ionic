@@ -1,17 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> Por hacer </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- con el *ngIf que es un if le digo que si cumple tal tan condicion para que se renderize   -->
+  <ion-list *ngIf="listaService.lists.length > 0"> 
+    <ion-item-sliding *ngFor="let list of listaService.lists">
+      <ion-item style="cursor: grab"> {{list.title}} </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="warning" (click)="editList(list)">
+          editar
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteList(list)">
+          eleminar
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    (click)="agregarLista()"
+  >
+    <ion-fab-button>
+      <ion-icon name="arrow-forward-circle"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
