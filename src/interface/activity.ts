@@ -1,4 +1,5 @@
 export interface IActivity {
-    description: string;
-    completed: boolean
+    id: number,
+    description: string,
+    completed: boolean,
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IList } from "src/interface/list";
-import { List } from "src/app/models/list.model"
+import { List } from "src/app/models/list.model";
+import { AlertController, ToastController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,10 @@ export class ListaService {
 
   public lists: IList[] = []
 
-  constructor() {
+  constructor(
+    public alertController: AlertController,
+    public toastController: ToastController,
+  ) {
     this.loadStorage()
   }
 
@@ -51,6 +56,30 @@ export class ListaService {
       findList.title = list.title;
       this.guardarStorage();
     }
+  }
+
+  async presentToast(message: string, position: "top" | "bottom" | "middle" | undefined = "middle", color: "danger" | "success" = "danger") {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1800,
+      color: color,
+      position: position
+    });
+    await toast.present();
+  }
+
+
+  validateInput(data: any) {
+    if (data && data.title) {
+      return true
+    }
+    this.presentToast("Tienes que ingresar un valor")
+    return false
+  }
+
+  getListById(idList: number) {
+    const findList = this.lists.find(el => el.id === idList);
+    return findList;
   }
 
 }

@@ -5,22 +5,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- con el *ngIf que es un if le digo que si cumple tal tan condicion para que se renderize   -->
-  <ion-list *ngIf="listaService.lists.length > 0"> 
-    <ion-item-sliding *ngFor="let list of listaService.lists">
-      <ion-item style="cursor: grab"> {{list.title}} </ion-item>
-      <ion-item-options side="start">
-        <ion-item-option color="warning" (click)="editList(list)">
-          editar
-        </ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="deleteList(list)">
-          eleminar
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+
+  <app-listas type="por hacer"></app-listas>
 
   <ion-fab
     vertical="bottom"
